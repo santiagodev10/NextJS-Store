@@ -1,13 +1,14 @@
-import styles from "./page.module.css";
+import { Hero } from "@/components/home/Hero";
+import { Description } from "@/components/home/Description";
+import { MainProducts } from "@/components/home/MainProducts";
 
 export default function Home() {
   console.log("Home page rendered");
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <h1>Hello world!!</h1>
-        <h2>This is my first Next JS project!</h2>
+      <main>
+        <Hero />
+        <Description />
+        <MainProducts />
       </main>
-    </div>
   );
 }
