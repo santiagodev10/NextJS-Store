@@ -1,0 +1,2 @@
+//Este archivo sirve como proxy para exportar el componente Header, lo que permite una importación más limpia y organizada en otras partes de la aplicación. En lugar de importar directamente desde el archivo del componente, se puede importar desde este índice, lo que mejora la legibilidad y facilita la gestión de los componentes.
+export { Header } from "./Header";
