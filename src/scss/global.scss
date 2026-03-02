@@ -1,0 +1,14 @@
+@import "variables.scss";
+
+body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: $color-primary;
+}
+
+* {
+    list-style: none;
+    text-decoration: none;
+}

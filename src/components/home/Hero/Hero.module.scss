@@ -3,5 +3,7 @@
     font-weight: bold;
     text-align: center;
     margin: 2rem 0;
-    color: $color-primary;
+    background: linear-gradient(90deg, rgb(188, 117, 255) 0%, rgb(132, 0, 132) 100%);
+    color: transparent;
+    background-clip: text;
 }
