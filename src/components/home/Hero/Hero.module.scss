@@ -1,9 +1,14 @@
 .hero {
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: bold;
     text-align: center;
     margin: 2rem 0;
-    background: linear-gradient(90deg, rgb(188, 117, 255) 0%, rgb(132, 0, 132) 100%);
+    background: linear-gradient(90deg, rgb(255, 150, 234) 0%, rgb(87, 0, 237) 100%);
     color: transparent;
     background-clip: text;
+}
+
+.slogan {
+    font-size: 1.5rem;
+    text-align: center;
 }
