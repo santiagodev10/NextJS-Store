@@ -3,12 +3,19 @@
 body {
     font-family: system-ui, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 1rem;
     box-sizing: border-box;
+    font-size: 62.5%;
     background: $color-primary;
 }
 
+section {
+    margin-bottom: 2rem;
+}
+
 * {
+    margin: 0;
+    padding: 0;
     list-style: none;
     text-decoration: none;
     color: $text-color;
