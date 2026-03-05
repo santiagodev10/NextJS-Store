@@ -1,14 +1,21 @@
 .hero-container {
     display: grid;
-    justify-items: center;
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 300px; /* altura base en mobile */
+    max-width: 36rem;
+    justify-self: center;
 }
 
 .hero-image {
-    width: 100%;
-    max-width: 36rem;
-    border-radius: 1rem;
     object-fit: cover;
+    border-radius: 1rem;
     box-shadow: 0 0 20px 4px #626262;
 }
 
@@ -31,18 +38,7 @@
 @media (min-width: 1024px) {
     .hero-container {
         grid-template-columns: 1fr 1fr;
-        padding: 2rem 8rem;
-    }
-
-    .hero-image {
-        grid-column: 1;
-    }
-
-    .description-title, .description-content {
-        grid-column: 2;
-    }
-
-    .description-content {
-        grid-column: 2;
+        padding: 4rem 8rem;
+        align-items: center;
     }
 }
