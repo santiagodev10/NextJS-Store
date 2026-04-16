@@ -15,8 +15,16 @@
 
 .hero-image {
     object-fit: cover;
+    border: 3px solid transparent;
     border-radius: 1rem;
     box-shadow: 0 0 20px 4px #626262;
+    cursor: pointer;
+}
+
+.button-image {
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .description-container {
@@ -34,6 +42,11 @@
     line-height: 1.5;
 }
 
+.hasBorder {
+    img {
+        border: 3px solid #ff1fe1;
+    }
+}
 
 @media (min-width: 1024px) {
     .hero-container {
