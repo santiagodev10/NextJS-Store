@@ -2,24 +2,36 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./MainProducts.module.scss";
 
+// const FORCE_ERROR_BOUNDARY = true;
+
 const getProducts = async () => {
     try {
+        // if (FORCE_ERROR_BOUNDARY) {
+        //     throw new Error("Intentional error to test error boundary");
+        // }
+
         const response = await fetch(`${process.env.SHOPIFY_HOST_NAME}/admin/api/2025-04/products.json`, {
             headers: new Headers({
                 "X-Shopify-Access-Token": process.env.SHOPIFY_API_KEY || ""
             })
         });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch products: ${response.status} ${response.statusText}`);
+        }
+
         const data = await response.json();
-        return data.products;
+        return Array.isArray(data.products) ? data.products : [];
     } catch (error) {
-        console.error("Error fetching products:", error); 
+        console.error("Error fetching products:", error);
+        throw error;
     }
 }
 
 export const MainProducts = async () => {
     const products = await getProducts();
 
-    if (!products?.length) {
+    if (!products.length) {
         return (
             <section className={styles.section}>
                 <h2 className={styles.title}>Main Products</h2>
