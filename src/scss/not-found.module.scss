@@ -1,0 +1,86 @@
+@use "variables" as *;
+
+.NotFound {
+    min-height: calc(100vh - 2rem);
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+    text-align: center;
+    padding: 2rem 1rem 3rem;
+    background:
+        radial-gradient(circle at top left, rgba(255, 31, 225, 0.2), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(87, 0, 237, 0.28), transparent 34%),
+        $color-primary;
+}
+
+.NotFound__title {
+    font-size: clamp(4rem, 18vw, 9rem);
+    line-height: 0.9;
+    font-weight: 700;
+    background: linear-gradient(90deg, rgb(255, 150, 234) 0%, rgb(87, 0, 237) 100%);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: 0 0 20px rgba(255, 31, 225, 0.16);
+}
+
+.NotFound :global(img) {
+    width: min(100%, 20rem);
+    height: auto;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px 4px rgba(98, 98, 98, 0.24);
+}
+
+.NotFound__subtitle {
+    max-width: 34rem;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.NotFound__description {
+    max-width: 28rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(221, 221, 221, 0.86);
+}
+
+.NotFound__link {
+    margin-top: 0.25rem;
+    min-height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, rgb(255, 150, 234) 0%, rgb(87, 0, 237) 100%);
+    color: rgb(255, 255, 255);
+    box-shadow: 0 12px 30px rgba(87, 0, 237, 0.28);
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.NotFound__link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(87, 0, 237, 0.34);
+    filter: saturate(1.08);
+}
+
+.NotFound__link:focus-visible {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 0 0 4px rgba(255, 31, 225, 0.18);
+}
+
+@media (min-width: 1024px) {
+    .NotFound {
+        gap: 1.4rem;
+        padding: 3rem 2rem 4rem;
+    }
+
+    .NotFound__description {
+        font-size: 1.15rem;
+    }
+}

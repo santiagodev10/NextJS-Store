@@ -1,19 +1,31 @@
-"use client"; // Los componentes de error deben ser Client Components
+"use client"
 
-import { useEffect } from "react";
+import Image from "next/image";
+import styles from "@/scss/error.module.scss";
 
-export default function Error({ error, reset }) {
-   useEffect(() => {
-      console.error("Error in MainProducts component:", error);
-   }, [error]);
-   
+export default function GlobalError({ error, reset }) {
    return (
-         <div style={{ padding: "2rem", textAlign: "center" }}>
-            <h1>🥲</h1>
-            <p style={{ fontSize: "20px" }}>Something went wrong!</p>
-            <button onClick={() => reset()} style={{ marginTop: "1rem", padding: "0.5rem 1rem" }}>
+         <main className={styles.errorPage}>
+            <section className={styles.errorCard}>
+               <div className={styles.copy}>
+                  <span className={styles.eyebrow}>Global error</span>
+                  <h1 className={styles.title}>An unexpected error has occurred 🥲</h1>
+                  <p className={styles.message}>Don't feel bad about it.</p>
+               </div>
+               <div className={styles.imageFrame}>
+                  <Image 
+                     className={styles.image}
+                     src="/images/error.png"
+                     alt="Global error"
+                     width={400}
+                     height={300}
+                     priority
+                  />
+               </div>
+               <button onClick={() => reset()} className={styles.button}>
                   Try again
-            </button>
-         </div>
-      );
+               </button>
+            </section>
+         </main>
+   );
 }

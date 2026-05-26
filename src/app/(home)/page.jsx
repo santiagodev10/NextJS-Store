@@ -5,14 +5,14 @@ import { MainProducts } from "@/components/home/MainProducts";
 import { Loader } from "@/components/shared/Loader";
 
 export default function Home() {
-  console.log("Home page rendered");
-  return (
+   console.log("Home page rendered");
+   return (
       <main>
-        <Hero />
-        <Description />
-        <Suspense fallback={<Loader />}>
-          <MainProducts />
-        </Suspense>
+         <Hero />
+         <Description />
+         <Suspense fallback={<Loader />}>
+         <MainProducts />
+         </Suspense>
       </main>
-  );
+   );
 }
