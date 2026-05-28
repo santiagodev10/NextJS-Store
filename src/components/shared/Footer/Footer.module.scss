@@ -1,0 +1,29 @@
+@use "@/scss/variables" as *;
+
+.footer {
+    margin-top: 2rem;
+    padding: 1.1rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.06) 100%);
+    border-radius: 0.8rem;
+}
+
+.copy {
+    margin: 0;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: rgba(221, 221, 221, 0.92);
+}
+
+@media (min-width: 1024px) {
+    .footer {
+        margin-top: 2.6rem;
+        padding: 1.35rem 1.25rem;
+    }
+
+    .copy {
+        font-size: 1rem;
+    }
+}

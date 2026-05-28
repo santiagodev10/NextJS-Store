@@ -1,0 +1,77 @@
+@use "@/scss/variables" as *;
+
+.ProductCard__link {
+	display: block;
+	border-radius: 1rem;
+}
+
+.ProductCard {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.9rem;
+	height: 100%;
+	padding: 0.8rem;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 1rem;
+	background: linear-gradient(150deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+	overflow: hidden;
+	transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+
+	img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		border-radius: 0.75rem;
+		border: 2px solid transparent;
+		transition: transform 300ms ease, border-color 220ms ease, filter 300ms ease;
+	}
+
+	&:hover {
+		transform: translateY(-6px);
+		border-color: rgba(255, 31, 225, 0.6);
+		box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+
+		img {
+			transform: scale(1.03);
+			border-color: rgba(255, 31, 225, 0.55);
+			filter: saturate(1.08);
+		}
+	}
+}
+
+.ProductCard__info {
+	display: flex;
+	min-height: 3.6rem;
+
+	h3 {
+		margin: 0;
+		font-size: 1.05rem;
+		font-weight: 700;
+		line-height: 1.35;
+		color: $text-color;
+		display: -webkit-box;
+		line-clamp: 2;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+}
+
+.ProductCard__priceTag {
+	width: fit-content;
+	margin-top: auto;
+	padding: 0.35rem 0.7rem;
+	border-radius: 999px;
+	border: 1px solid rgba(255, 31, 225, 0.45);
+	background: rgba(255, 31, 225, 0.14);
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: rgb(255, 222, 251);
+}
+
+.ProductCard__link:focus-visible {
+	outline: 2px solid rgb(255, 31, 225);
+	outline-offset: 3px;
+}
