@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./MainProducts.module.scss";
-import { getProducts } from "@/services/shopify";
+// import { getProducts } from "@/services/shopify";
 
 export const MainProducts = async () => {
-    const products = await getProducts();
+    const response = await fetch("http://localhost:4000/api");
+    const products = await response.json();
 
     if (!products.length) {
         return (
