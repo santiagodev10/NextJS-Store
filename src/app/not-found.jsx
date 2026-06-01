@@ -11,6 +11,7 @@ export default function NotFound() {
          alt="404"
          width={300}
          height={300}
+         loading="eager"
          />
          <h2 className={styles.NotFound__subtitle}>
          ¡Ups, it looks like the link disappeared!

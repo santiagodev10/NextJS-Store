@@ -1,5 +1,8 @@
 export const shopifyUrls = {
    products: {
       "all": `${process.env.SHOPIFY_HOSTNAME}/admin/api/2025-04/products.json`
+   },
+   collections: {
+      "all": `${process.env.SHOPIFY_HOSTNAME}/admin/api/2025-04/smart_collections.json`
    }
 }
