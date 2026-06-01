@@ -1,0 +1,96 @@
+@use "@/scss/variables" as *;
+
+.storeLayout {
+   display: grid;
+   gap: 1.15rem;
+}
+
+.header {
+   padding: 1rem;
+   border: 1px solid rgba(255, 255, 255, 0.15);
+   border-radius: 1rem;
+   background:
+      radial-gradient(circle at 15% 0%, rgba(253, 173, 85, 0.12), transparent 48%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+   backdrop-filter: blur(4px);
+}
+
+.title {
+   font-size: clamp(1.45rem, 1.2rem + 1.1vw, 2rem);
+   font-weight: 800;
+   letter-spacing: 0.02em;
+   color: $text-color;
+}
+
+.subtitle {
+   margin-top: 0.25rem;
+   font-size: 0.95rem;
+   color: rgba(221, 221, 221, 0.8);
+}
+
+.nav {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 0.6rem;
+   margin-top: 1rem;
+}
+
+.link {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 2.2rem;
+   padding: 0.45rem 0.8rem;
+   border: 1px solid rgba(255, 255, 255, 0.2);
+   border-radius: 999px;
+   font-size: 0.88rem;
+   font-weight: 600;
+   color: rgba(221, 221, 221, 0.95);
+   background-color: rgba(255, 255, 255, 0.03);
+   transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease;
+
+   &:hover {
+      transform: translateY(-1px);
+      border-color: rgba(253, 173, 85, 0.72);
+      background-color: rgba(253, 173, 85, 0.16);
+   }
+
+   &:focus-visible {
+      outline: 2px solid rgba(253, 173, 85, 0.95);
+      outline-offset: 2px;
+   }
+}
+
+.active {
+   border-color: rgba(253, 173, 85, 0.9);
+   color: rgb(255, 236, 205);
+   background-color: rgba(253, 173, 85, 0.24);
+}
+
+.content {
+   display: block;
+}
+
+@media (min-width: 768px) {
+   .header {
+      padding: 1.15rem 1.2rem;
+   }
+
+   .nav {
+      gap: 0.7rem;
+   }
+
+   .link {
+      font-size: 0.92rem;
+   }
+}
+
+@media (min-width: 1024px) {
+   .storeLayout {
+      gap: 1.4rem;
+   }
+
+   .header {
+      padding: 1.25rem 1.35rem;
+   }
+}

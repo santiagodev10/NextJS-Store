@@ -7,8 +7,8 @@ export const ProductCard = ({ product }) => {
       <Link href={`/articulo/${product.handle}?id=${product.id}`} className={styles.ProductCard__link}>
          <article className={styles.ProductCard}>
          <Image
-            src={product.image}
-            alt={product.title}
+            src={product.image?.src}
+            alt={product.image?.alt || product.title}
             quality={80}
             height={320}
             width={320}
