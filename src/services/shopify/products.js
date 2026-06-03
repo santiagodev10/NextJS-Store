@@ -45,11 +45,23 @@ export const getProducts = async () => {
          console.error("Error fetching products:", error);
          throw error;
       }
-      };
+};
 
-      export const getProductByHandle = async (handle) => {
-         if (!handle) return null;
+export const getProductByHandle = async (handle) => {
+   if (!handle) return null;
 
-         const products = await getProducts();
-         return products.find((product) => product.handle === handle) || null;
-      };
+   const products = await getProducts();
+   return products.find((product) => product.handle === handle) || null;
+};
+
+export const getMainProducts = async () => {
+   const response = await fetch(shopifyUrls.products.mainProducts, {
+      headers: new Headers({
+         'X-Shopify-Access-Token': env.SHOPIFY_TOKEN
+      }) 
+   });
+
+   const {products} = await response.json()
+
+   return products
+}

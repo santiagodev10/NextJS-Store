@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./MainProducts.module.scss";
-// import { getProducts } from "@/services/shopify";
+import { getMainProducts } from "@/services/shopify/products";
 
 export const MainProducts = async () => {
-    const response = await fetch("http://localhost:4000/api");
-    const products = await response.json();
+    const mainProducts = await getMainProducts();
 
-    if (!products.length) {
+    if (!mainProducts.length) {
         return (
             <section className={styles.section}>
                 <h2 className={styles.title}>Main Products</h2>
@@ -21,7 +20,7 @@ export const MainProducts = async () => {
             <h2 className={styles.title}>Main Products</h2>
 
             <div className={styles.grid}>
-                {products.map((product) => {
+                {mainProducts.map((product) => {
                     const imageSrc = product.image?.src || product.images?.[0]?.src;
                     const price = product.variants?.[0]?.price;
                     const compareAtPrice = product.variants?.[0]?.compare_at_price;
