@@ -4,7 +4,7 @@ import styles from './ProductCard.module.scss'
 
 export const ProductCard = ({ product }) => {
    return (
-      <Link href={`/articulo/${product.handle}?id=${product.id}`} className={styles.ProductCard__link}>
+      <Link href={`/product/${product.handle}?id=${product.id}`} className={styles.ProductCard__link}>
          <article className={styles.ProductCard}>
          <Image
             src={product.image?.src}

@@ -1,11 +1,14 @@
-export default async function ProductPage({ params, searchParams }) {
+import { notFound } from "next/navigation";
+import { ProductView } from "@/components/product/ProductView";
+import { getProductByHandle } from "@/services/shopify/products";
+
+export default async function ProductPage({ params }) {
    const { handle } = await params;
-   const { id } = await searchParams;
+   const product = await getProductByHandle(handle);
 
-   console.log("Received params:", handle);
-   console.log("Received searchParams:", id);
+   if (!product) {
+      notFound();
+   }
 
-   return (
-      <h1>Hello world</h1>
-   )
+   return <ProductView product={product} />;
 }
