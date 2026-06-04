@@ -1,12 +1,7 @@
 import Image from "next/image";
 import { ProductViewItemsOrder } from "./ProductViewItemsOrder";
+import { SanitizedHtml } from "@/components/shared/SanitizedHtml";
 import styles from "./ProductView.module.scss";
-
-const sanitizeDescription = (description) => {
-	if (!description) return "Sin descripcion disponible para este producto.";
-	const cleanText = description.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-	return cleanText || "Sin descripcion disponible para este producto.";
-};
 
 export const ProductView = ({ product }) => {
 	const { id, title, description, price, image, quantity, handle, tags } = product;
@@ -31,7 +26,7 @@ export const ProductView = ({ product }) => {
 					<h1 className={styles.ProductView__title}>{title}</h1>
 				</header>
 
-				<p className={styles.ProductView__description}>{sanitizeDescription(description)}</p>
+				<SanitizedHtml html={description} className={styles.ProductView__description} />
 
 				{!!tags?.length && (
 					<ul className={styles.ProductView__tags}>
