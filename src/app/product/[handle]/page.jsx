@@ -3,6 +3,60 @@ import { notFound } from "next/navigation";
 import { ProductView } from "@/components/product/ProductView";
 import { getProductByHandle } from "@/services/shopify/products";
 
+const buildSeoDescription = (description) => {
+   if (!description) return "Descubre este producto de nuestra tienda online.";
+
+   const plainText = description
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+   if (!plainText) return "Descubre este producto de nuestra tienda online.";
+
+   return plainText.length > 160 ? `${plainText.slice(0, 157).trim()}...` : plainText;
+};
+
+export async function generateMetadata({ params }) {
+   const { handle } = await params;
+   const product = await getProductByHandle(handle);
+
+   if (!product) {
+      return {
+         title: "Producto no encontrado",
+         description: "No se encontró el producto solicitado en la tienda.",
+      };
+   }
+
+   const seoDescription = buildSeoDescription(product.description);
+
+   return {
+      title: product.title,
+      description: seoDescription,
+      alternates: {
+         canonical: `/product/${product.handle}`,
+      },
+      openGraph: {
+         title: product.title,
+         description: seoDescription,
+         type: "product",
+         images: product.image
+            ? [
+                  {
+                     url: product.image.src,
+                     alt: product.image.alt || product.title,
+                  },
+               ]
+            : [],
+      },
+      twitter: {
+         card: product.image ? "summary_large_image" : "summary",
+         title: product.title,
+         description: seoDescription,
+         images: product.image ? [product.image.src] : [],
+      },
+   };
+}
+
 export default async function ProductPage({ params, searchParams }) {
    const { id } = await searchParams;
    const { handle } = await params;
