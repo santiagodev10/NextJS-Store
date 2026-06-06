@@ -13,6 +13,8 @@ export const Header = () => {
                         <Link href="/store" className={styles.link}>Store</Link>
                     </li>
                 </ul>
+
+                <Link href="/signup" className={styles.signupLink}>Signup</Link>
             </nav>
         </header>
     );

@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
       openGraph: {
          title: product.title,
          description: seoDescription,
-         type: "product",
+         type: "website",
          images: product.image
             ? [
                   {
