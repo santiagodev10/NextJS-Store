@@ -1,7 +1,81 @@
 "use server";
 
-export async function handleCreateUser(formData) {
-   const payload = Object.fromEntries(formData.entries());
+import { GraphQLClientSingleton } from "@/graphql";
+import { createUserMutation } from "@/graphql/mutations/createUserMutation";
 
-   console.log("Datos de registro:", payload);
+export async function handleCreateUser(formData) {
+   const formDataObject = Object.fromEntries(formData);
+   const name = String(formDataObject.name || "").trim();
+   const lastname = String(formDataObject.lastname || "").trim();
+   const email = String(formDataObject.email || "").trim().toLowerCase();
+   const phone = String(formDataObject.phone || "").trim();
+   const password = String(formDataObject.password || "");
+   const retypePassword = String(formDataObject.retypePassword || "");
+
+   if (!name || !lastname || !email || !phone || !password || !retypePassword) {
+      return {
+         ok: false,
+         message: "Todos los campos son obligatorios.",
+      };
+   }
+
+   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+   if (!emailRegex.test(email)) {
+      return {
+         ok: false,
+         message: "Email invalido.",
+      };
+   }
+
+   if (password.length < 8) {
+      return {
+         ok: false,
+         message: "La contrasena debe tener al menos 8 caracteres.",
+      };
+   }
+
+   if (password !== retypePassword) {
+      return {
+         ok: false,
+         message: "Las contrasenas no coinciden.",
+      };
+   }
+
+   try {
+      const graphqlClient = GraphQLClientSingleton.getInstance().getClient();
+
+      const variables = {
+         input: {
+            firstName: name,
+            lastName: lastname,
+            email,
+            password,
+            phone: phone.startsWith("+") ? phone : `+58${phone}`,
+         },
+      };
+
+      const { customerCreate } = await graphqlClient.request(createUserMutation, variables);
+      const { customerUserErrors, customer } = customerCreate;
+
+      if (customerUserErrors?.length) {
+         return {
+            ok: false,
+            message: customerUserErrors[0].message,
+            errors: customerUserErrors,
+         };
+      }
+
+      return {
+         ok: true,
+         customer,
+      };
+   } catch (error) {
+      console.error("Error creando cliente en Shopify:", error);
+
+      return {
+         ok: false,
+         message: "No se pudo completar el registro. Intentalo de nuevo.",
+      };
+   }
 }

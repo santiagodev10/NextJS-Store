@@ -1,14 +1,37 @@
 "use client";
 
+import { useState } from "react";
 import { handleCreateUser } from "@/actions";
 import styles from "./SignupForm.module.scss";
 
 export const SignupForm = () => {
+   const [isSubmitting, setIsSubmitting] = useState(false);
+   const [feedback, setFeedback] = useState(null);
+
    const handleSubmit = async (event) => {
       event.preventDefault();
+      setFeedback(null);
+      setIsSubmitting(true);
 
       const formData = new FormData(event.target);
-      await handleCreateUser(formData);
+
+      const result = await handleCreateUser(formData);
+
+      if (!result?.ok) {
+         setFeedback({
+            type: "error",
+            message: result?.message || "No se pudo crear la cuenta.",
+         });
+         setIsSubmitting(false);
+         return;
+      }
+
+      setFeedback({
+         type: "success",
+         message: "Cuenta creada correctamente.",
+      });
+      event.target.reset();
+      setIsSubmitting(false);
    };
 
    return (
@@ -53,8 +76,14 @@ export const SignupForm = () => {
             </div>
 
             <button className={styles.submitButton} type="submit">
-               Crear cuenta
+               {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}
             </button>
+
+            {feedback && (
+               <p role="status" aria-live="polite">
+                  {feedback.message}
+               </p>
+            )}
          </form>
       </section>
    );
