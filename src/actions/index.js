@@ -2,6 +2,7 @@
 
 import { GraphQLClientSingleton } from "@/graphql";
 import { createUserMutation } from "@/graphql/mutations/createUserMutation";
+import { createAccessToken } from "@/utils/auth/createAccessToken";
 
 export async function handleCreateUser(formData) {
    const formDataObject = Object.fromEntries(formData);
@@ -66,9 +67,26 @@ export async function handleCreateUser(formData) {
          };
       }
 
+      if (!customer?.firstName) {
+         return {
+            ok: false,
+            message: "No se pudo crear la cuenta.",
+         };
+      }
+
+      const accessTokenResult = await createAccessToken(email, password);
+
+      if (!accessTokenResult?.ok) {
+         return {
+            ok: false,
+            message: accessTokenResult?.message || "La cuenta fue creada, pero no se pudo iniciar sesion automaticamente.",
+         };
+      }
+
       return {
          ok: true,
          customer,
+         redirectTo: "/store",
       };
    } catch (error) {
       console.error("Error creando cliente en Shopify:", error);

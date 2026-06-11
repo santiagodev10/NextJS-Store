@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { handleCreateUser } from "@/actions";
+import { useRouter } from "next/navigation";
 import styles from "./SignupForm.module.scss";
 
 export const SignupForm = () => {
+   const router = useRouter();
    const [isSubmitting, setIsSubmitting] = useState(false);
    const [feedback, setFeedback] = useState(null);
 
@@ -32,6 +34,10 @@ export const SignupForm = () => {
       });
       event.target.reset();
       setIsSubmitting(false);
+
+      if (result?.redirectTo) {
+         router.push(result.redirectTo);
+      }
    };
 
    return (
