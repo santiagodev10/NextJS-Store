@@ -3,6 +3,8 @@
 import { GraphQLClientSingleton } from "@/graphql";
 import { createUserMutation } from "@/graphql/mutations/createUserMutation";
 import { createAccessToken } from "@/utils/auth/createAccessToken";
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
 export async function handleCreateUser(formData) {
    const formDataObject = Object.fromEntries(formData);
@@ -96,4 +98,44 @@ export async function handleCreateUser(formData) {
          message: "No se pudo completar el registro. Intentalo de nuevo.",
       };
    }
+}
+
+export async function handleLogin(previousState, formData) {
+   const formDataObject = Object.fromEntries(formData);
+   const email = String(formDataObject.email || "").trim().toLowerCase();
+   const password = String(formDataObject.password || "");
+
+   if (!email || !password) {
+      return {
+         ok: false,
+         message: "El email y la contrasena son obligatorios.",
+      };
+   }
+
+   try {
+      const accessTokenResult = await createAccessToken(email, password);
+
+      if (accessTokenResult?.accessToken) {
+         redirect("/store");
+      }
+
+      return {
+         ok: false,
+         message: accessTokenResult?.message || "No se pudo iniciar sesion.",
+      };
+   } catch (error) {
+      console.error("Error iniciando sesion:", error);
+
+      return {
+         ok: false,
+         message: "No se pudo iniciar sesion. Intentalo de nuevo.",
+      };
+   }
+}
+
+export async function handleLogout() {
+   const cookieStore = await cookies();
+   cookieStore.delete("customerAccessToken");
+
+   redirect("/login");
 }

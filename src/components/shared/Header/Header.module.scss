@@ -25,6 +25,48 @@
       gap: 0.75rem;
    }
 
+.actions {
+   display: flex;
+   align-items: center;
+   gap: 0.75rem;
+}
+
+.loggedInBadge {
+   display: inline-flex;
+   align-items: center;
+   padding: 0.45rem 0.85rem;
+   border: 1px solid rgba(109, 255, 186, 0.35);
+   border-radius: 999px;
+   font-size: 0.85rem;
+   font-weight: 700;
+   color: rgb(181, 255, 219);
+   background: rgba(19, 114, 61, 0.22);
+}
+
+.logoutButton {
+   display: inline-block;
+   padding: 0.55rem 0.95rem;
+   border: 1px solid rgba(255, 255, 255, 0.2);
+   border-radius: 999px;
+   font-size: 0.95rem;
+   font-weight: 700;
+   color: rgb(255, 255, 255);
+   background: rgba(255, 255, 255, 0.08);
+   cursor: pointer;
+   transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+
+   &:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 109, 109, 0.58);
+      background: rgba(255, 109, 109, 0.16);
+   }
+
+   &:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.85);
+      outline-offset: 2px;
+   }
+}
+
    .link {
       display: inline-block;
       padding: 0.55rem 0.95rem;
@@ -85,6 +127,15 @@
 
    .menu {
       width: 100%;
+   }
+
+   .actions {
+      width: 100%;
+      justify-content: space-between;
+   }
+
+   .logoutButton {
+      flex-shrink: 0;
    }
 
    .signupLink {

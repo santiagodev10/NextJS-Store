@@ -43,6 +43,7 @@ export const createAccessToken = async (email, password) => {
 
    return {
       ok: true,
+      accessToken,
       expiresAt,
    };
 }
