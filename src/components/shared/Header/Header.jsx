@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { handleLogout } from "@/actions";
 import { validateAccessToken } from "@/utils/auth/validateAccessToken";
+import { ShoppingCart } from "@/components/shared/ShoppingCart";
 import styles from "./Header.module.scss";
 
 export const Header = async () => {
@@ -27,6 +28,8 @@ export const Header = async () => {
                 ) : <Link href="/login"></Link>}
 
                 <div className={styles.actions}>
+                    <ShoppingCart />
+
                     {isLoggedIn && (
                         <>
                             <span className={styles.loggedInBadge}>Sesión iniciada</span>

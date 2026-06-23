@@ -1,0 +1,44 @@
+.cartButton {
+   display: inline-flex;
+   align-items: center;
+   gap: 0.45rem;
+   padding: 0.5rem 0.8rem;
+   border: 1px solid rgba(255, 255, 255, 0.2);
+   border-radius: 999px;
+   color: rgb(255, 255, 255);
+   background: rgba(255, 255, 255, 0.08);
+   cursor: pointer;
+   transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+
+   &:hover {
+      transform: translateY(-2px);
+      border-color: rgba(116, 209, 255, 0.58);
+      background: rgba(116, 209, 255, 0.16);
+   }
+
+   &:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.9);
+      outline-offset: 2px;
+   }
+}
+
+.icon {
+   width: 1.1rem;
+   height: 1.1rem;
+}
+
+.label {
+   font-size: 0.9rem;
+   font-weight: 700;
+}
+
+.count {
+   min-width: 1.35rem;
+   padding: 0.1rem 0.35rem;
+   border-radius: 999px;
+   font-size: 0.78rem;
+   font-weight: 700;
+   text-align: center;
+   color: rgb(25, 30, 36);
+   background: rgb(255, 255, 255);
+}
