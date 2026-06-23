@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { handleLogout } from "@/actions";
+import { validateAccessToken } from "@/utils/auth/validateAccessToken";
 import styles from "./Header.module.scss";
 
 export const Header = async () => {
-    const cookieStore = await cookies();
-    const isLoggedIn = Boolean(cookieStore.get("customerAccessToken")?.value);
+    const { isValid, customer } = await validateAccessToken();
+    const isLoggedIn = isValid;
 
     return (
         <header className={styles.header}>
@@ -21,6 +21,10 @@ export const Header = async () => {
                         <Link href="/login" className={styles.link}>Login</Link>
                     </li>
                 </ul>
+
+                {customer?.firstName ? (
+                    <p className={styles.greeting}>Hola <span>{customer.firstName}</span></p>
+                ) : <Link href="/login"></Link>}
 
                 <div className={styles.actions}>
                     {isLoggedIn && (
