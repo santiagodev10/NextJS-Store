@@ -1,4 +1,8 @@
+"use client";
+
+import { useRef } from "react";
 import styles from "./ProductViewItemsOrder.module.scss";
+import { useStoreWithQuantity } from "@/hooks/useShoppingCart";
 
 const formatPrice = (price) => {
 	const value = Number(price);
@@ -11,7 +15,19 @@ const formatPrice = (price) => {
 };
 
 export const ProductViewItemsOrder = ({ id, title, price, quantity, handle }) => {
+	const quantityInputRef = useRef(null);
 	const stock = Number(quantity) > 0 ? Number(quantity) : 0;
+	const addToCart = useStoreWithQuantity((state) => state.addToCart);
+
+	const handleAddToCart = (e) => {
+		e.preventDefault();
+		const rawValue = Number(quantityInputRef.current?.value);
+		const selectedQuantity = Number.isNaN(rawValue)
+			? 1
+			: Math.min(Math.max(1, rawValue), stock || 1);
+
+		addToCart({ id, title, price, quantity: selectedQuantity, handle });
+	};
 
 	return (
 		<aside className={styles.ProductViewItemsOrder}>
@@ -25,6 +41,7 @@ export const ProductViewItemsOrder = ({ id, title, price, quantity, handle }) =>
 			<div className={styles.ProductViewItemsOrder__actions}>
 				<label htmlFor="qty" className={styles.ProductViewItemsOrder__label}>Cantidad</label>
 				<input
+					ref={quantityInputRef}
 					id="qty"
 					type="number"
 					min={1}
@@ -37,6 +54,7 @@ export const ProductViewItemsOrder = ({ id, title, price, quantity, handle }) =>
 					type="button"
 					disabled={stock === 0}
 					className={styles.ProductViewItemsOrder__button}
+					onClick={handleAddToCart}
 				>
 					Agregar al carrito
 				</button>
