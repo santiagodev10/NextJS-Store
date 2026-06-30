@@ -1,3 +1,7 @@
+.cartWrapper {
+   position: relative;
+}
+
 .cartButton {
    display: inline-flex;
    align-items: center;
@@ -41,4 +45,109 @@
    text-align: center;
    color: rgb(25, 30, 36);
    background: rgb(255, 255, 255);
+}
+
+.cartModal {
+   position: absolute;
+   top: calc(100% + 0.6rem);
+   right: 0;
+   z-index: 25;
+   width: min(90vw, 22rem);
+   max-height: 20rem;
+   padding: 0.9rem;
+   border: 1px solid rgba(255, 255, 255, 0.28);
+   border-radius: 0.9rem;
+   background: rgb(16, 24, 32);
+   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+   overflow-y: auto;
+}
+
+.modalTitle {
+   margin: 0 0 0.7rem;
+   font-size: 0.95rem;
+   color: rgb(255, 255, 255);
+}
+
+.emptyText {
+   margin: 0;
+   font-size: 0.87rem;
+   color: rgba(255, 255, 255, 0.78);
+}
+
+.itemsList {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+   display: grid;
+   gap: 0.7rem;
+}
+
+.item {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 0.9rem;
+   padding-bottom: 0.7rem;
+   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+   &:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+   }
+}
+
+.itemInfo {
+   min-width: 0;
+   display: grid;
+   gap: 0.2rem;
+}
+
+.itemTitle {
+   font-size: 0.86rem;
+   font-weight: 700;
+   color: rgb(255, 255, 255);
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+.itemMeta {
+   font-size: 0.75rem;
+   color: rgba(255, 255, 255, 0.72);
+}
+
+.itemPrice {
+   flex-shrink: 0;
+   font-size: 0.8rem;
+   font-weight: 700;
+   color: rgb(116, 209, 255);
+}
+
+.checkoutButton {
+   width: 100%;
+   margin-top: 0.85rem;
+   padding: 0.62rem 0.8rem;
+   border: 0;
+   border-radius: 0.65rem;
+   font-size: 0.88rem;
+   font-weight: 700;
+   color: rgb(12, 16, 22);
+   background: rgb(116, 209, 255);
+   cursor: pointer;
+   transition: transform 160ms ease, filter 160ms ease;
+
+   &:hover:not(:disabled) {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+   }
+
+   &:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.95);
+      outline-offset: 2px;
+   }
+
+   &:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+   }
 }
