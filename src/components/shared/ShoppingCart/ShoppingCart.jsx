@@ -24,6 +24,10 @@ export const ShoppingCart = () => {
    const removeFromCart = useStoreWithQuantity((state) => state.removeFromCart);
    const setItemQuantity = useStoreWithQuantity((state) => state.setItemQuantity);
    const totalItems = cart.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
+   const totalPrice = cart.reduce(
+      (sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 0),
+      0
+   );
 
    const handleDecrease = (itemId, currentQuantity) => {
       setItemQuantity(itemId, Number(currentQuantity) - 1);
@@ -97,6 +101,11 @@ export const ShoppingCart = () => {
                      ))}
                   </ul>
                )}
+
+               <div className={styles.totalRow} aria-live="polite">
+                  <span>Total:</span>
+                  <strong>{formatPrice(totalPrice)}</strong>
+               </div>
 
                <button
                   type="button"
