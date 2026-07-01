@@ -31,6 +31,10 @@
    height: 1.1rem;
 }
 
+.iconAnimated {
+   animation: cartIconFeedback 420ms ease;
+}
+
 .label {
    font-size: 0.9rem;
    font-weight: 700;
@@ -45,6 +49,37 @@
    text-align: center;
    color: rgb(25, 30, 36);
    background: rgb(255, 255, 255);
+}
+
+.cartButtonAnimated {
+   animation: cartButtonFeedback 420ms ease;
+}
+
+@keyframes cartButtonFeedback {
+   0% {
+      transform: translateY(0) scale(1);
+   }
+   35% {
+      transform: translateY(-2px) scale(1.04);
+   }
+   100% {
+      transform: translateY(0) scale(1);
+   }
+}
+
+@keyframes cartIconFeedback {
+   0% {
+      transform: scale(1) rotate(0deg);
+   }
+   30% {
+      transform: scale(1.18) rotate(-12deg);
+   }
+   60% {
+      transform: scale(1.08) rotate(10deg);
+   }
+   100% {
+      transform: scale(1) rotate(0deg);
+   }
 }
 
 .cartModal {

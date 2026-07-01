@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./ProductViewItemsOrder.module.scss";
 import { useStoreWithQuantity } from "@/hooks/useShoppingCart";
 
@@ -16,8 +16,18 @@ const formatPrice = (price) => {
 
 export const ProductViewItemsOrder = ({ id, title, price, quantity, handle }) => {
 	const quantityInputRef = useRef(null);
+	const [isAddFeedbackActive, setIsAddFeedbackActive] = useState(false);
+	const addFeedbackTimerRef = useRef(null);
 	const stock = Number(quantity) > 0 ? Number(quantity) : 0;
 	const addToCart = useStoreWithQuantity((state) => state.addToCart);
+
+	useEffect(() => {
+		return () => {
+			if (addFeedbackTimerRef.current) {
+				clearTimeout(addFeedbackTimerRef.current);
+			}
+		};
+	}, []);
 
 	const handleAddToCart = (e) => {
 		e.preventDefault();
@@ -27,6 +37,19 @@ export const ProductViewItemsOrder = ({ id, title, price, quantity, handle }) =>
 			: Math.min(Math.max(1, rawValue), stock || 1);
 
 		addToCart({ id, title, price, quantity: selectedQuantity, handle });
+
+		setIsAddFeedbackActive(false);
+		if (addFeedbackTimerRef.current) {
+			clearTimeout(addFeedbackTimerRef.current);
+		}
+
+		requestAnimationFrame(() => {
+			setIsAddFeedbackActive(true);
+		});
+
+		addFeedbackTimerRef.current = setTimeout(() => {
+			setIsAddFeedbackActive(false);
+		}, 460);
 	};
 
 	return (
@@ -53,7 +76,7 @@ export const ProductViewItemsOrder = ({ id, title, price, quantity, handle }) =>
 				<button
 					type="button"
 					disabled={stock === 0}
-					className={styles.ProductViewItemsOrder__button}
+					className={`${styles.ProductViewItemsOrder__button} ${isAddFeedbackActive ? styles.ProductViewItemsOrder__buttonAdded : ""}`}
 					onClick={handleAddToCart}
 				>
 					Agregar al carrito

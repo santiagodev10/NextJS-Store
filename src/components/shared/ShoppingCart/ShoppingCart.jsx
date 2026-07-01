@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { FiTrash2 } from "react-icons/fi";
 import { useStoreWithQuantity } from "@/hooks/useShoppingCart";
@@ -20,7 +20,9 @@ const formatPrice = (price) => {
 
 export const ShoppingCart = () => {
    const [isOpen, setIsOpen] = useState(false);
+   const [isCartFeedbackActive, setIsCartFeedbackActive] = useState(false);
    const cart = useStoreWithQuantity((state) => state.cart);
+   const cartFeedbackTick = useStoreWithQuantity((state) => state.cartFeedbackTick);
    const removeFromCart = useStoreWithQuantity((state) => state.removeFromCart);
    const setItemQuantity = useStoreWithQuantity((state) => state.setItemQuantity);
    const totalItems = cart.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
@@ -37,17 +39,39 @@ export const ShoppingCart = () => {
       setItemQuantity(itemId, Number(currentQuantity) + 1);
    };
 
+   useEffect(() => {
+      if (!cartFeedbackTick) return;
+
+      setIsCartFeedbackActive(false);
+
+      const activateTimer = setTimeout(() => {
+         setIsCartFeedbackActive(true);
+      }, 0);
+
+      const clearTimer = setTimeout(() => {
+         setIsCartFeedbackActive(false);
+      }, 460);
+
+      return () => {
+         clearTimeout(activateTimer);
+         clearTimeout(clearTimer);
+      };
+   }, [cartFeedbackTick]);
+
    return (
       <div className={styles.cartWrapper}>
          <button
             type="button"
-            className={styles.cartButton}
+            className={`${styles.cartButton} ${isCartFeedbackActive ? styles.cartButtonAnimated : ""}`}
             aria-label={`Carrito de compras con ${totalItems} productos`}
             aria-expanded={isOpen}
             aria-haspopup="dialog"
             onClick={() => setIsOpen((prev) => !prev)}
          >
-            <FiShoppingCart aria-hidden="true" className={styles.icon} />
+            <FiShoppingCart
+               aria-hidden="true"
+               className={`${styles.icon} ${isCartFeedbackActive ? styles.iconAnimated : ""}`}
+            />
             <span className={styles.label}>Carrito</span>
             <span className={styles.count} aria-live="polite">
                {totalItems}

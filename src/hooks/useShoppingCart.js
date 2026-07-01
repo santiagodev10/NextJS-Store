@@ -11,6 +11,7 @@ export const useStore = create((set) => ({
 // Version con cantidades por producto (misma idea de store, con reglas de negocio).
 export const useStoreWithQuantity = create((set) => ({
    cart: [],
+   cartFeedbackTick: 0,
    addToCart: (cartItem) =>
       set((state) => {
          const existingItem = state.cart.find((item) => item.id === cartItem.id);
@@ -18,6 +19,7 @@ export const useStoreWithQuantity = create((set) => ({
          if (!existingItem) {
             return {
                cart: [...state.cart, { ...cartItem, quantity: cartItem.quantity ?? 1 }],
+               cartFeedbackTick: state.cartFeedbackTick + 1,
             };
          }
 
@@ -27,6 +29,7 @@ export const useStoreWithQuantity = create((set) => ({
                   ? { ...item, quantity: item.quantity + (cartItem.quantity ?? 1) }
                   : item
             ),
+            cartFeedbackTick: state.cartFeedbackTick + 1,
          };
       }),
    setItemQuantity: (itemId, quantity) =>
