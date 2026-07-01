@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
+import { FiTrash2 } from "react-icons/fi";
 import { useStoreWithQuantity } from "@/hooks/useShoppingCart";
 import styles from "./ShoppingCart.module.scss";
 
@@ -20,7 +21,17 @@ const formatPrice = (price) => {
 export const ShoppingCart = () => {
    const [isOpen, setIsOpen] = useState(false);
    const cart = useStoreWithQuantity((state) => state.cart);
+   const removeFromCart = useStoreWithQuantity((state) => state.removeFromCart);
+   const setItemQuantity = useStoreWithQuantity((state) => state.setItemQuantity);
    const totalItems = cart.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
+
+   const handleDecrease = (itemId, currentQuantity) => {
+      setItemQuantity(itemId, Number(currentQuantity) - 1);
+   };
+
+   const handleIncrease = (itemId, currentQuantity) => {
+      setItemQuantity(itemId, Number(currentQuantity) + 1);
+   };
 
    return (
       <div className={styles.cartWrapper}>
@@ -51,9 +62,37 @@ export const ShoppingCart = () => {
                         <li key={item.id} className={styles.item}>
                            <div className={styles.itemInfo}>
                               <span className={styles.itemTitle}>{item.title}</span>
-                              <span className={styles.itemMeta}>Cantidad: {item.quantity}</span>
+                              <div className={styles.itemControls}>
+                                 <button
+                                    type="button"
+                                    className={styles.quantityButton}
+                                    aria-label={`Disminuir cantidad de ${item.title}`}
+                                    onClick={() => handleDecrease(item.id, item.quantity)}
+                                 >
+                                    -
+                                 </button>
+                                 <span className={styles.itemMeta}>Cantidad: {item.quantity}</span>
+                                 <button
+                                    type="button"
+                                    className={styles.quantityButton}
+                                    aria-label={`Aumentar cantidad de ${item.title}`}
+                                    onClick={() => handleIncrease(item.id, item.quantity)}
+                                 >
+                                    +
+                                 </button>
+                              </div>
                            </div>
-                           <span className={styles.itemPrice}>{formatPrice(item.price)}</span>
+                           <div className={styles.itemActions}>
+                              <span className={styles.itemPrice}>{formatPrice(item.price)}</span>
+                              <button
+                                 type="button"
+                                 className={styles.removeButton}
+                                 aria-label={`Eliminar ${item.title} del carrito`}
+                                 onClick={() => removeFromCart(item.id)}
+                              >
+                                 <FiTrash2 aria-hidden="true" />
+                              </button>
+                           </div>
                         </li>
                      ))}
                   </ul>

@@ -102,6 +102,36 @@
    gap: 0.2rem;
 }
 
+.itemControls {
+   display: inline-flex;
+   align-items: center;
+   gap: 0.35rem;
+}
+
+.quantityButton {
+   width: 1.45rem;
+   height: 1.45rem;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   border: 1px solid rgba(255, 255, 255, 0.28);
+   border-radius: 0.4rem;
+   color: rgb(255, 255, 255);
+   background: transparent;
+   cursor: pointer;
+   transition: border-color 150ms ease, background-color 150ms ease;
+
+   &:hover {
+      border-color: rgba(116, 209, 255, 0.7);
+      background: rgba(116, 209, 255, 0.16);
+   }
+
+   &:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.95);
+      outline-offset: 2px;
+   }
+}
+
 .itemTitle {
    font-size: 0.86rem;
    font-weight: 700;
@@ -121,6 +151,36 @@
    font-size: 0.8rem;
    font-weight: 700;
    color: rgb(116, 209, 255);
+}
+
+.itemActions {
+   display: grid;
+   justify-items: end;
+   gap: 0.35rem;
+}
+
+.removeButton {
+   width: 1.55rem;
+   height: 1.55rem;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   border: 0;
+   border-radius: 0.45rem;
+   color: rgba(255, 255, 255, 0.82);
+   background: transparent;
+   cursor: pointer;
+   transition: color 150ms ease, background-color 150ms ease;
+
+   &:hover {
+      color: rgb(255, 107, 107);
+      background: rgba(255, 107, 107, 0.18);
+   }
+
+   &:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.95);
+      outline-offset: 2px;
+   }
 }
 
 .checkoutButton {
