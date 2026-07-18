@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { FiTrash2 } from "react-icons/fi";
+import { handleCreateCart } from "@/actions";
 import { useStoreWithQuantity } from "@/hooks/useShoppingCart";
 import styles from "./ShoppingCart.module.scss";
 
@@ -21,6 +22,7 @@ const formatPrice = (price) => {
 export const ShoppingCart = () => {
    const [isOpen, setIsOpen] = useState(false);
    const [isCartFeedbackActive, setIsCartFeedbackActive] = useState(false);
+   const [isCheckoutPending, startCheckoutTransition] = useTransition();
    const cart = useStoreWithQuantity((state) => state.cart);
    const cartFeedbackTick = useStoreWithQuantity((state) => state.cartFeedbackTick);
    const removeFromCart = useStoreWithQuantity((state) => state.removeFromCart);
@@ -37,6 +39,19 @@ export const ShoppingCart = () => {
 
    const handleIncrease = (itemId, currentQuantity) => {
       setItemQuantity(itemId, Number(currentQuantity) + 1);
+   };
+
+   const handleCheckout = () => {
+      startCheckoutTransition(async () => {
+         const result = await handleCreateCart(cart);
+
+         if (!result?.ok) {
+            alert(result?.message || "No se pudo iniciar el checkout.");
+            return;
+         }
+
+         window.location.assign(result.checkoutUrl);
+      });
    };
 
    useEffect(() => {
@@ -134,9 +149,10 @@ export const ShoppingCart = () => {
                <button
                   type="button"
                   className={styles.checkoutButton}
-                  disabled={cart.length === 0}
+                  disabled={cart.length === 0 || isCheckoutPending}
+                  onClick={handleCheckout}
                >
-                  Comprar
+                  {isCheckoutPending ? "Procesando..." : "Comprar"}
                </button>
             </div>
          )}

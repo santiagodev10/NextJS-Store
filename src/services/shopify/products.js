@@ -12,6 +12,7 @@ const normalizeProduct = (product) => {
 
       return {
          id: product.id,
+         variantId: product.variants?.[0]?.id,
          title: product.title,
          description: product.body_html || product.description || "",
          price: product.variants?.[0]?.price || 0,

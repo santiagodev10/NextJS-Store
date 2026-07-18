@@ -14,7 +14,7 @@ const formatPrice = (price) => {
 	}).format(value);
 };
 
-export const ProductViewItemsOrder = ({ id, title, price, quantity, handle }) => {
+export const ProductViewItemsOrder = ({ id, variantId, title, price, quantity, handle }) => {
 	const quantityInputRef = useRef(null);
 	const [isAddFeedbackActive, setIsAddFeedbackActive] = useState(false);
 	const addFeedbackTimerRef = useRef(null);
@@ -36,7 +36,7 @@ export const ProductViewItemsOrder = ({ id, title, price, quantity, handle }) =>
 			? 1
 			: Math.min(Math.max(1, rawValue), stock || 1);
 
-		addToCart({ id, title, price, quantity: selectedQuantity, handle });
+		addToCart({ id, variantId, title, price, quantity: selectedQuantity, handle });
 
 		setIsAddFeedbackActive(false);
 		if (addFeedbackTimerRef.current) {

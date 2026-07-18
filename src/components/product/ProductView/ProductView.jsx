@@ -4,7 +4,7 @@ import { SanitizedHtml } from "@/components/shared/SanitizedHtml";
 import styles from "./ProductView.module.scss";
 
 export const ProductView = ({ product }) => {
-	const { id, title, description, price, image, quantity, handle, tags } = product;
+	const { id, variantId, title, description, price, image, quantity, handle, tags } = product;
 
 	return (
 		<article className={styles.ProductView}>
@@ -36,13 +36,14 @@ export const ProductView = ({ product }) => {
 					</ul>
 				)}
 
-				<ProductViewItemsOrder
-					id={id}
-					title={title}
-					price={price}
-					quantity={quantity}
-					handle={handle}
-				/>
+			<ProductViewItemsOrder
+				id={id}
+				variantId={variantId}
+				title={title}
+				price={price}
+				quantity={quantity}
+				handle={handle}
+			/>
 			</div>
 		</article>
 	);
