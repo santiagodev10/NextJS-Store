@@ -127,6 +127,10 @@ export async function handleLogin(previousState, formData) {
          message: accessTokenResult?.message || "No se pudo iniciar sesion.",
       };
    } catch (error) {
+      if (error?.digest?.startsWith("NEXT_REDIRECT")) {
+         throw error;
+      }
+
       console.error("Error iniciando sesion:", error);
 
       return {
