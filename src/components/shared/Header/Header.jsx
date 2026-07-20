@@ -18,9 +18,11 @@ export const Header = async () => {
                     <li>
                         <Link href="/store" className={styles.link}>Store</Link>
                     </li>
-                    <li>
-                        <Link href="/login" className={styles.link}>Login</Link>
-                    </li>
+                    {!isLoggedIn && (
+                        <li>
+                            <Link href="/login" className={styles.link}>Login</Link>
+                        </li>
+                    )}
                 </ul>
 
                 {customer?.firstName ? (
@@ -42,7 +44,9 @@ export const Header = async () => {
                         </>
                     )}
 
-                    <Link href="/signup" className={styles.signupLink}>Signup</Link>
+                    {!isLoggedIn && (
+                        <Link href="/signup" className={styles.signupLink}>Signup</Link>
+                    )}
                 </div>
             </nav>
         </header>
