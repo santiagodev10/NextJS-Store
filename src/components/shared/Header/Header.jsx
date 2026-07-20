@@ -2,6 +2,7 @@ import Link from "next/link";
 import { handleLogout } from "@/actions";
 import { validateAccessToken } from "@/utils/auth/validateAccessToken";
 import { ShoppingCart } from "@/components/shared/ShoppingCart";
+import { BsChatDots } from "react-icons/bs";
 import styles from "./Header.module.scss";
 
 export const Header = async () => {
@@ -17,6 +18,12 @@ export const Header = async () => {
                     </li>
                     <li>
                         <Link href="/store" className={styles.link}>Store</Link>
+                    </li>
+                    <li>
+                        <Link href="/chat" className={styles.link}>
+                            <BsChatDots style={{ marginRight: '0.35rem' }} />
+                            Chat
+                        </Link>
                     </li>
                     {!isLoggedIn && (
                         <li>
