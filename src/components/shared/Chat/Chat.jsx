@@ -7,7 +7,8 @@ import styles from './Chat.module.scss';
 
 export const Chat = () => {
    const [input, setInput] = useState('');
-   const { messages, sendMessage, isLoading } = useChat();
+   const { messages, sendMessage, status } = useChat();
+   const isLoading = status === 'submitted' || status === 'streaming';
    const messagesEndRef = useRef(null);
    const inputRef = useRef(null);
 
