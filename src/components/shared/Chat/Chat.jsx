@@ -48,23 +48,10 @@ export const Chat = () => {
                   </div>
                   <div className={styles.content}>
                      {message.parts.map((part, i) => {
-                        switch (part.type) {
-                           case 'text':
-                              return <p key={`${message.id}-${i}`}>{part.text}</p>;
-                           case 'tool-searchProducts':
-                              return (
-                                 <div key={`${message.id}-${i}`} className={styles.toolResult}>
-                                    <strong>Resultados de búsqueda:</strong>
-                                    <ul>
-                                       {part.toolResult?.content?.map((item, j) => (
-                                          <li key={j}>{item}</li>
-                                       ))}
-                                    </ul>
-                                 </div>
-                              );
-                           default:
-                              return null;
+                        if (part.type === 'text') {
+                           return <p key={`${message.id}-${i}`}>{part.text}</p>;
                         }
+                        return null;
                      })}
                   </div>
                </div>
