@@ -30,6 +30,11 @@ export const Header = async () => {
                             <Link href="/login" className={styles.link}>Login</Link>
                         </li>
                     )}
+                    {isLoggedIn && (
+                        <li>
+                            <Link href="/account" className={styles.link}>Mi Cuenta</Link>
+                        </li>
+                    )}
                 </ul>
 
                 {customer?.firstName ? (
