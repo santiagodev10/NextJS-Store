@@ -113,6 +113,26 @@
    p {
       margin: 0;
       white-space: pre-wrap;
+
+      a {
+         color: rgb(255, 150, 234);
+         text-decoration: underline;
+         text-underline-offset: 2px;
+         font-weight: 600;
+         transition: color 160ms ease;
+
+         &:hover {
+            color: rgb(255, 215, 250);
+         }
+      }
+
+      code {
+         padding: 0.15rem 0.4rem;
+         border-radius: 4px;
+         font-size: 0.9em;
+         background: rgba(255, 255, 255, 0.1);
+         font-family: monospace;
+      }
    }
 }
 

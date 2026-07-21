@@ -3,6 +3,7 @@
 import { useChat } from '@ai-sdk/react';
 import { useState, useRef, useEffect } from 'react';
 import { BsSend, BsRobot, BsPerson } from 'react-icons/bs';
+import { parseMarkdown } from './utils';
 import styles from './Chat.module.scss';
 
 export const Chat = () => {
@@ -49,7 +50,7 @@ export const Chat = () => {
                   <div className={styles.content}>
                      {message.parts.map((part, i) => {
                         if (part.type === 'text') {
-                           return <p key={`${message.id}-${i}`}>{part.text}</p>;
+                           return <p key={`${message.id}-${i}`}>{parseMarkdown(part.text)}</p>;
                         }
                         return null;
                      })}
