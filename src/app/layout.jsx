@@ -1,5 +1,6 @@
 import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
+import { CheckoutDetector } from "@/components/checkout/CheckoutDetector";
 import { Roboto } from "next/font/google";
 import { env } from "@/config/env";
 //No hace falta importar los estilos globales como en css modules, ya que Next JS los aplica automáticamente a toda la aplicación
@@ -49,6 +50,7 @@ export default function RootLayout({ children }) {
         <Header />
         {children}
         <Footer />
+        <CheckoutDetector />
       </body>
     </html>
   );

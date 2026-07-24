@@ -43,9 +43,14 @@ export const ShoppingCart = () => {
 
    const handleCheckout = () => {
       startCheckoutTransition(async () => {
+         sessionStorage.setItem("checkoutPending", "true");
+         sessionStorage.setItem("checkoutCartItems", JSON.stringify(cart));
+
          const result = await handleCreateCart(cart);
 
          if (!result?.ok) {
+            sessionStorage.removeItem("checkoutPending");
+            sessionStorage.removeItem("checkoutCartItems");
             alert(result?.message || "No se pudo iniciar el checkout.");
             return;
          }
