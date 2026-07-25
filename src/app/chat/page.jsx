@@ -1,4 +1,4 @@
-import { Chat } from '@/components/shared/Chat';
+import { ChatWrapper } from '@/components/shared/Chat';
 
 export const metadata = {
    title: 'Chat - Asistente de compras',
@@ -8,7 +8,7 @@ export const metadata = {
 export default function ChatPage() {
    return (
       <main>
-         <Chat />
+         <ChatWrapper />
       </main>
    );
 }
