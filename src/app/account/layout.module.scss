@@ -74,6 +74,12 @@
    display: grid;
    grid-template-columns: 1fr;
    gap: 2rem;
+   align-items: start;
+}
+
+.user_info {
+   position: sticky;
+   top: 6rem;
 }
 
 @media (min-width: 768px) {

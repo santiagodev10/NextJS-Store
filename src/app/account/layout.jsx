@@ -13,7 +13,7 @@ export default async function AccountLayout({ children, user_info, orders_info }
       <section className={styles.account}>
          <h1 className={styles.title}>Mi Cuenta</h1>
          <div className={styles.grid}>
-            {user_info}
+            <div className={styles.user_info}>{user_info}</div>
             {orders_info}
          </div>
          {children}
