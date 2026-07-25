@@ -20,6 +20,7 @@ export const CheckoutDetector = () => {
 
             if (data.hasNewOrders) {
                clearCart();
+               localStorage.removeItem("shopping-cart");
                setOrderCount(data.orders.length);
                setShowSuccess(true);
 
