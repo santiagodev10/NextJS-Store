@@ -1,4 +1,4 @@
-import styles from "./page.module.scss";
+import styles from "./layout.module.scss";
 
 export default function AccountLoading() {
    return (

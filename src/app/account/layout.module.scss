@@ -26,12 +26,6 @@
    }
 }
 
-.grid {
-   display: grid;
-   grid-template-columns: 1fr;
-   gap: 2rem;
-}
-
 .cardSkeleton {
    border: 1px solid rgba(255, 255, 255, 0.1);
    border-radius: 1rem;
@@ -74,6 +68,12 @@
 .lineShort {
    width: 45%;
    animation: pulse 1.6s ease-in-out infinite 160ms;
+}
+
+.grid {
+   display: grid;
+   grid-template-columns: 1fr;
+   gap: 2rem;
 }
 
 @media (min-width: 768px) {
